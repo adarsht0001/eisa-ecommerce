@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <link rel="icon" href="/images/fevicon.png" type="image/png" />
+  <title>Eiser ecommerce</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/stylesheets/user/bootstrap.css" />
+    <link rel="stylesheet" href="/vendors/users/linericon/style.css" />
+    <link rel="stylesheet" href="/stylesheets/user/font-awesome.min.css" />
+    <link rel="stylesheet" href="/stylesheets/user/themify-icons.css" />
+    <link rel="stylesheet" href="/stylesheets/user/flaticon.css" />
+    <link rel="stylesheet" href="/vendors/users/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/vendors/users//lightbox/simpleLightbox.css" />
+    <link rel="stylesheet" href="/vendors/users/nice-select/css/nice-select.css" />
+    <link rel="stylesheet" href="/vendors/users/animate-css/animate.css" />
+    <link rel="stylesheet" href="/vendors/users/jquery-ui/jquery-ui.css" />
+    <!-- main css -->
+    <link rel="stylesheet" href="/stylesheets/user/style.css" />
+    <link rel="stylesheet" href="/stylesheets/user/responsive.css" />
+</head>
+
+<body>
+    <!--================Header Menu Area =================-->
+    {{>userheader}}
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="billing_details">
+                        <div class="row">
+                            {{#if address}}
+                            <div class="col-md-6">
+                                <div class="card mb-2">
+                                    <div class="card-body">
+                                        <p class="text-uppercase fw-bold text-font">Default Address</p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span id="usedName{{address._id}}">{{address.Name}}</span><br>
+                                                Number : <span id="usedMob{{address._id}}"
+                                                    class="card-text">{{address.Mobile}}</span><br>
+                                                Email : <span id="usedem{{address._id}}"
+                                                    class="card-text">{{address.email}}</span><br>
+                                                Address : <span id="usedadd{{address._id}}"
+                                                    class="card-text">{{address.address}}</span><br>
+                                                City : <span id="usedcity{{address._id}}"
+                                                    class="card-text">{{address.city}}</span><br>
+                                                Pin : <span id="usedpin{{address._id}}"
+                                                    class="card-text">{{address.pin}}</span><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-dark"
+                                        onclick="Apply('{{address._id}}')">Use This
+                                        Address
+                                    </button>
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{#if recent}}
+                            <div class="col-md-6">
+                                <div class="card mb-2">
+                                    <div class="card-body">
+                                        <p class="text-uppercase fw-bold text-font">Recent Address</p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span id="usedName{{recent._id}}">{{recent.Name}}</span><br>
+                                                Number : <span id="usedMob{{recent._id}}"
+                                                    class="card-text">{{recent.Mobile}}</span><br>
+                                                Email : <span id="usedem{{recent._id}}"
+                                                    class="card-text">{{recent.email}}</span><br>
+                                                Address : <span id="usedadd{{recent._id}}"
+                                                    class="card-text">{{recent.address}}</span><br>
+                                                City : <span id="usedcity{{recent._id}}"
+                                                    class="card-text">{{recent.city}}</span><br>
+                                                Pin : <span id="usedpin{{recent._id}}"
+                                                    class="card-text">{{recent.pin}}</span><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-dark"
+                                        onclick="Apply('{{recent._id}}')">Use This
+                                        Address
+                                    </button>
+                                </div>
+                            </div>
+                            {{/if}}
+                            <div class="col-lg-12">
+                                <form class="row contact_form" action="/checkout" method="post" id="form1">
+                                    <h3>Delivery Details</h3>
+                                    <input type="text" name="userid" value="{{user._id}}" hidden>
+                                    <div class="col-md-12 form-group p_star">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="first" name="name" required />
+                                    </div>
+                                    <div class="col-md-6 form-group p_star">
+                                        <label for="number">Phone number</label>
+                                        <input type="text" class="form-control" id="number" name="number" required />
+                                    </div>
+                                    <div class="col-md-6 form-group p_star">
+                                        <label for="email">Email Address</label>
+                                        <input type="text" class="form-control" id="email" name="email" required />
+                                    </div>
+                                    <div class="col-md-12 form-group p_star">
+                                        <label for="Address">Address</label>
+                                        <input type="text" class="form-control" id="add" name="Address" required />
+                                    </div>
+                                    <div class="col-md-12 form-group p_star">
+                                        <label for="city">Town/City</label>
+                                        <input type="text" class="form-control" id="city" name="city" required />
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="zip">Postcode/ZIP</label>
+                                        <input type="text" class="form-control" id="zip" name="zip" required />
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                        <h2>Your Order</h2>
+                        <ul class="list">
+                            <li>
+                                <a href="#">Product
+                                    <span>Total</span>
+                                </a>
+                            </li>
+                            {{#each products}}
+                            <li>
+                                <a href="#">{{this.products.product}}
+                                    <span class="middle">x {{this.count}}</span>
+                                    <span class="last">{{this.total}}</span>
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        <ul class="list list_2">
+                            {{#if Discount}}
+                            <li>
+                                <a href="#">Discount
+                                    <span>{{Discount}}</span>
+                                </a>
+                            </li>
+                            {{/if}}
+                            <li>
+                                <a href="#">Total
+                                    <span>{{total.total}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option5" name="Payment" value="COD" checked />
+                                <label for="f-option5">COD</label>
+                                <div class="check"></div>
+                            </div>
+                            <p>
+                                Make Your Payment on COD.
+                            </p>
+                        </div>
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option8" name="Payment" value="Wallet" />
+                                <label for="f-option8">Wallet </label>
+                                <div class="check"></div>
+                            </div>
+                            <p>
+                                Make Your Payment on Wallet.
+                                <br>
+                                Balance:₹{{wallettotal}}
+                            </p>
+                        </div>
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option7" name="Payment" value="RazorPay" />
+                                <label for="f-option7">Razor Pay </label>
+                                <img src="img/product/single-product/card.jpg" alt="" />
+                                <div class="check"></div>
+                                <p>
+                                    Make Your Payment on RazorPay.
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option6" name="Payment" value="Paypal" />
+                                <label for="f-option6">Paypal </label>
+                                <img src="img/product/single-product/card.jpg" alt="" />
+                                <div class="check"></div>
+                            </div>
+                            <p>
+                                Make Your Payment on PayPal.
+                            </p>
+                        </div>
+                        <button class="main_btn" type="submit">Proceed to Payment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <!--================End Checkout Area =================-->
+    <script src="/javascripts/user/jquery-3.2.1.min.js"></script>
+    <script src="/javascripts/user/popper.js"></script>
+    <script src="/javascripts/user/bootstrap.min.js"></script>
+    <script src="/javascripts/user/stellar.js"></script>
+    <script src="/vendors/users/lightbox/simpleLightbox.min.js"></script>
+    <script src="/vendors/users/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="/vendors/users/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="/vendors/users/isotope/isotope-min.js"></script>
+    <script src="/vendors/users/owl-carousel/owl.carousel.min.js"></script>
+    <script src="/javascripts/user/jquery.ajaxchimp.min.js"></script>
+    <script src="/javascripts/user/mail-script.js"></script>
+    <script src="/vendors/users/jquery-ui/jquery-ui.js"></script>
+    <script src="/vendors/users/counter-up/jquery.waypoints.min.js"></script>
+    <script src="/vendors/users/counter-up/jquery.counterup.js"></script>
+    <script src="/javascripts/user/theme.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="/user/checkout.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function Apply(id) {
+            usedName = document.getElementById('usedName' + id).innerHTML
+            usedMob = document.getElementById('usedMob' + id).innerHTML
+            usedem = document.getElementById('usedem' + id).innerHTML
+            usedadd = document.getElementById('usedadd' + id).innerHTML
+            usedcity = document.getElementById('usedcity' + id).innerHTML
+            usedpin = document.getElementById('usedpin' + id).innerHTML
+
+            document.getElementById('first').value = usedName
+            document.getElementById('number').value = usedMob
+            document.getElementById('email').value = usedem
+            document.getElementById('add').value = usedadd
+            document.getElementById('city').value = usedcity
+            document.getElementById('zip').value = usedpin
+        }
+    </script>
+</body>
+
+</html>

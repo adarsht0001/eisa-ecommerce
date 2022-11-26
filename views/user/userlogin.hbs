@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/user/loginform.css">
+    <link rel="icon" href="/images/fevicon.png" type="image/png" />
+  <title>Eiser ecommerce</title>
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <form action="/login" method="post" class="form">
+            {{#if errorMessage}}
+            <p style="color:red;">{{errorMessage}}</p>
+            {{/if}}
+            <h2>Login</h2>
+            <div class="input-group">
+                <input type="email" name="email" required value="adarsht01@gmail.com">
+                <label>Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" required value="Adarsh@123">
+                <label>Password</label>
+            </div>
+            <input type="submit" value="Submit" class="submit-btn">
+            <p class="text-center mt-5 mb-0">Create an account <a href="/signup" style="color: green;">here</a>
+            </p>
+            <div>
+                <a href="/login-otp" class="submit-btn" style="text-align: center; text-decoration: none; margin: 10px; margin-top: 20px;">Login with OTP</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

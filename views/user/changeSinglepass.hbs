@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/admin/vendors/feather/feather.css">
+    <link rel="stylesheet" href="/admin/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="/admin/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="/admin/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="/admin/js/select.dataTables.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/admin/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="/admin/images/favicon.png" />
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <style>
+        .digit-group1 input {
+            width: 30px;
+            height: 30px;
+            background-color: #18182a;
+            border: none;
+            line-height: 50px;
+            text-align: center;
+            font-size: 24px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 200;
+            color: white;
+            margin: 0 2px;
+        }
+
+        .digit-group1 .splitter {
+            padding: 0 5px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .prompt {
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-scroller">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <h4 class="text-uppercase">{{user.name}}</h4>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            {{>userprofile}}
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">User Profile</p>
+                                <section style="background-color: #eee;">
+                                    <div class="container py-5">
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-12 align-self-center">
+                                                <div class="contract p-5">
+                                                    <h1 class="text-center pb-3">Change Password</h1>
+                                                    <form method="post" action="/changpasswordotp"
+                                                        onsubmit="return validpass()">
+                                                        <div class="form-group">
+                                                            <input type="password" name="newpassword"
+                                                                oninput="newpasswordvalidate()" id="new-pass"
+                                                                class="form-control" placeholder="New Password"
+                                                                required>
+                                                            <span id="pass-error1" style="color: red;"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" id="repass" class="form-control"
+                                                                placeholder="Re-Enter Password"
+                                                                oninput="validateRepass()" required>
+                                                            <span id="pass-error2" style="color: red;"></span>
+                                                        </div>
+                                                        <div class="row px-5 pt-2">
+                                                            <button type="submit" onclick="changePassword()"
+                                                                class="btn btn-primary">Change
+                                                                Password</button>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/vendors/js/vendor.bundle.base.js"></script>
+    {{!--
+    <script src="/admin/vendors/chart.js/Chart.min.js"></script> --}}
+    <script src="/admin/js/off-canvas.js"></script>
+    <script src="/admin/js/hoverable-collapse.js"></script>
+    <script src="/admin/js/template.js"></script>
+    <script src="/admin/js/settings.js"></script>
+    <script src="/admin/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="/admin/js/dashboard.js"></script>
+    {{!--
+    <script src="/admin/js/Chart.roundedBarCharts.js"></script> --}}
+    <script src="/admin/js/Chart.roundedBarCharts.js"></script>
+    <script src="/javascripts/user/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/user/changepassword.js"></script>
+
+    <script>
+        function validpass() {
+            if (newpasswordvalidate() && validateRepass()) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+
+        function newpasswordvalidate() {
+            var pass = document.getElementById('new-pass').value
+            var passerror = document.getElementById('pass-error1')
+            var regexWhiteSpace = /^\S*$/
+            var regexUpperCase = /^(?=.*[A-Z]).*$/
+            var regexLowerCase = /^(?=.*[a-z]).*$/
+            var regexNumber = /^(?=.*[0-9]).*$/;
+            var regexSymbol = /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]).*$/;
+            var regexLength = /^.{7,16}$/;
+            if (pass == "") {
+                passerror.innerHTML = 'Password not entered'
+                return false;
+            } else if (!regexWhiteSpace.test(pass)) {
+                passerror.innerHTML = "Password must not contain Whitespaces."
+                return false;
+            } else if (!regexUpperCase.test(pass)) {
+                passerror.innerHTML = 'Password must have at least one Uppercase Character.'
+                return false;
+            } else if (!regexLowerCase.test(pass)) {
+                passerror.innerHTML = "Password must have at least one Lowercase Character."
+                return false;
+            } else if (!regexNumber.test(pass)) {
+                passerror.innerHTML = 'Password must contain at least one Digit.'
+                return false;
+            } else if (!regexSymbol.test(pass)) {
+                passerror.innerHTML = 'Password must contain at least one Special Symbol.'
+                return false;
+            } else if (!regexLength.test(pass)) {
+                passerror.innerHTML = 'Password must be 7-16 Characters Long.'
+                return false;
+            } else {
+                passerror.innerHTML = ''
+                return true
+            }
+        }
+
+        function validateRepass() {
+            let pass = document.getElementById('new-pass').value
+            let repass = document.getElementById('repass').value
+            let passerror = document.getElementById('pass-error2')
+            if (repass == '') {
+                passerror.innerHTML = 're-password not entered'
+                return false
+            } else if (pass != repass) {
+                passerror.innerHTML = "Password doesn't match"
+                return false
+            } else {
+                passerror.innerHTML = ""
+                return true
+            }
+        }
+    </script>
+</body>
+
+</html>

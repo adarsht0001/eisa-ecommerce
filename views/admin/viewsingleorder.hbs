@@ -1,0 +1,133 @@
+{{>adminhead}}
+
+<body>
+  <div class="container-scroller">
+    {{>adminnavbar}}
+    <div class="container-fluid page-body-wrapper">
+      {{>adminside}}
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table table-hover" id="userData">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Product Id</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Product Price</th>
+                    <th>TotalPrice</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each product}}
+                  <tr>
+                    <td>{{inc @index}}</td>
+                    <td>{{this.product}}</td>
+                    <td><img src="/product/{{this.products.imagefileName.[0]}}" alt=""
+                        style="height:70px; width: 70px; border-radius: 15px;" /></td>
+                    <td>{{this.products.product}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.products.offerprice}}</td>
+                    <td>{{this.productTotal}}</td>
+                    <td>{{this.status}}</td>
+                    <td>
+                      {{#if this.none}}
+                      {{else}}
+                      
+                      <div class="btn">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Action
+                        </a>
+                        {{#if this.return}}
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <p class="text-center">
+                            <button type="button" class="btn btn-outline-success"
+                              onclick="action('{{this._id}}','{{this.product}}','Returned','{{this.user}}')">Approve
+                              Return</button>
+                          </p>
+                          <p class="text-center">
+                            <button type="button" class="btn btn-outline-danger"
+                              onclick="action('{{this._id}}','{{this.product}}','Return Rejected')">Reject
+                              Return</button>
+                          </p>
+                        </div>
+                        {{else}}
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <p class="text-center">
+                            <button type="button" class="btn btn-outline-success"
+                              onclick="action('{{this._id}}','{{this.product}}','Delivered')">Delivered</button>
+                          </p>
+                          <p class="text-center">
+                            <button type="button" class="btn btn-outline-info"
+                              onclick="action('{{this._id}}','{{this.product}}','Dispatched')">Dispatched</button>
+                          </p>
+                          <p class="text-center">
+                            <button type="button" class="btn btn-outline-danger"
+                              onclick="action('{{this._id}}','{{this.product}}','Order Cancelled')">Cancel</button>
+                          </p>
+                          {{/if}}
+                        </div>
+                        {{/if}}
+                      </div>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          <!-- partial -->
+        </div>
+      </div>
+    </div>
+
+    <script src="/admin/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="/admin/vendors/chart.js/Chart.min.js"></script>
+    <script src="/admin/js/off-canvas.js"></script>
+    <script src="/admin/js/hoverable-collapse.js"></script>
+    <script src="/admin/js/template.js"></script>
+    <script src="/admin/js/settings.js"></script>
+    <script src="/admin/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="/admin/js/dashboard.js"></script>
+    <script src="/admin/js/Chart.roundedBarCharts.js"></script>
+    <script type="text/javascript" charset="utf8"
+      src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script>$(document).ready(function () {
+        $('#userData').DataTable();
+      });</script>
+
+    <script>
+      function action(ordeID, productId, action, uid) {
+        $.ajax({
+          url: '/admin/orderstatus',
+          data: {
+            order: ordeID,
+            product: productId,
+            action: action,
+            user: uid
+          },
+          method: 'post',
+          success: (response) => {
+            if (response.status) {
+              $("#userData").load(window.location.href + " #userData");
+            }
+          }
+        })
+      }
+    </script>
+</body>
+
+</html>

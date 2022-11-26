@@ -1,0 +1,86 @@
+{{>adminhead}}
+
+<body>
+  <div class="container-scroller">
+    {{>adminnavbar}}
+    <div class="container-fluid page-body-wrapper">
+      {{>adminside}}
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <a href="/admin/addcoupon"><button class="btn btn-outline-info btn-fw">Add Coupon</button></a>
+            <table class="table table-striped m-4" id="userData">
+              <thead class="table-dark">
+                <tr>
+                  <th>No.</th>
+                  <th scope="col">Coupon Name</th>
+                  <th scope="col">Expiry Date</th>
+                  <th scope="col">Upto Amount</th>
+                  <th>Min Amount</th>
+                  <th>Percnetage</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                {{#each coupons}}
+                <tr>
+                  <td>{{inc @index}}</td>
+                  <td>{{this.name}}</td>
+                  <td>{{this.ExpiryDate}}</td>
+                  <td>{{this.upTo}}</td>
+                  <td>{{this.MinAmount}}</td>
+                  <td>{{this.Percentage}}</td>
+                  <td> <button onclick="DeleteCoupon('{{this._id}}')" class="btn btn-secondary"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                        <path fill-rule="evenodd"
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                      </svg></button></td>
+                  {{/each}}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- content-wrapper ends -->
+        </div>
+      </div>
+    </div>
+
+    <script src="/admin/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="/admin/vendors/chart.js/Chart.min.js"></script>
+    <script src="/admin/js/off-canvas.js"></script>
+    <script src="/admin/js/hoverable-collapse.js"></script>
+    <script src="/admin/js/template.js"></script>
+    <script src="/admin/js/settings.js"></script>
+    <script src="/admin/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="/admin/js/dashboard.js"></script>
+    <script src="/admin/js/Chart.roundedBarCharts.js"></script>
+    <script type="text/javascript" charset="utf8"
+      src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script>$(document).ready(function () {
+        $('#userData').DataTable();
+      });</script>
+      <script>
+        function DeleteCoupon(id){
+          $.ajax({
+            url:'deleteCoupon',
+            data:{coupon:id},
+            method:'post',
+            success:(response)=>{
+              if(response.status){
+                 //$("#userData").load(window.location.href + " #userData");
+                 location.reload()
+              }
+            }
+          })
+        }
+      </script>
+</body>
+
+</html>

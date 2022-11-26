@@ -1,0 +1,209 @@
+{{>adminhead}}
+
+<body>
+    <div class="container-scroller">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <h4 class="text-uppercase">{{user.name}}</h4>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            {{>userprofile}}
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-6 grid-margin stretch-card">
+                            {{#if address}}
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title">Default Address</p>
+                                    <span>{{address.Name}}</span><br>
+                                    Number : <span class="card-text">{{address.Mobile}}</span><br>
+                                    Email : <span class="card-text">{{address.email}}</span><br>
+                                    Address : <span class="card-text">{{address.address}}</span><br>
+                                    City : <span class="card-text">{{address.city}}</span><br>
+                                    Pin : <span class="card-text">{{address.pin}}</span><br>
+                                </div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
+                                    Edit Address
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Address
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/editAddress" method="post">
+                                                    <div class="form-group">
+                                                        <input type="text" name="id" value="{{address._id}}" hidden>
+                                                        <label for="exampleInputEmail1">Name</label>
+                                                        <input type="text" class="form-control" name="Name"
+                                                            aria-describedby="emailHelp" placeholder="Enter Name"
+                                                            value="{{address.Name}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Mobile</label>
+                                                        <input type="number" class="form-control" name="Mobile"
+                                                            value="{{address.Mobile}}" placeholder="Email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Email</label>
+                                                        <input type="Email" class="form-control" name="email"
+                                                            value="{{address.email}}" placeholder="Email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Address</label>
+                                                        <input type="text" class="form-control" name="address"
+                                                            value="{{address.address}}" placeholder="Number">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">City</label>
+                                                        <input type="text" class="form-control" name="city"
+                                                            value="{{address.city}}" placeholder="Number">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Pin</label>
+                                                        <input type="text" class="form-control" name="pin"
+                                                            value="{{address.pin}}" placeholder="Number">
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save
+                                                    changes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{!-- <div class="col-md-6 grid-margin stretch-card">
+                            <div>
+                                <button type="button" class="btn btn-primary">Primary</button>
+                            </div>
+                        </div> --}}
+                        <H3>Recent Address</H3>
+                        <div class="row">
+                            <div class="col-md-6 grid-margin stretch-card">
+                                {{#each recent}}
+                                <div class="card">
+                                    <div class="card-body">
+                                        Name: <span>{{this.Address.Name}}</span><br>
+                                        Number : <span class="card-text">{{this.Address.Mobile}}</span><br>
+                                        Email : <span class="card-text">{{this.Address.email}}</span><br>
+                                        Address : <span class="card-text">{{this.Address.address}}</span><br>
+                                        City : <span class="card-text">{{this.Address.city}}</span><br>
+                                        Pin : <span class="card-text">{{this.Address.pin}}</span><br>
+                                        City : <span class="card-text">{{this.Address.city}}</span><br>
+                                    </div>
+                                  <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalCenter{{@index}}">
+                                    Edit Address
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter{{@index}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Address
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/editAddress" method="post">
+                                                    <div class="form-group">
+                                                        <input type="text" name="id" value="{{this.Address._id}}" hidden>
+                                                        <label for="exampleInputEmail1">Name</label>
+                                                        <input type="text" class="form-control" name="Name"
+                                                            aria-describedby="emailHelp" placeholder="Enter Name"
+                                                            value="{{this.Address.Name}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Mobile</label>
+                                                        <input type="number" class="form-control" name="Mobile"
+                                                            value="{{this.Address.Mobile}}" placeholder="Email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Email</label>
+                                                        <input type="Email" class="form-control" name="email"
+                                                            value="{{this.Address.email}}" placeholder="Email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Address</label>
+                                                        <input type="text" class="form-control" name="address"
+                                                            value="{{this.Address.address}}" placeholder="Number">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">City</label>
+                                                        <input type="text" class="form-control" name="city"
+                                                            value="{{this.Address.city}}" placeholder="Number">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Pin</label>
+                                                        <input type="text" class="form-control" name="pin"
+                                                            value="{{this.Address.pin}}" placeholder="Number">
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save
+                                                    changes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                {{/each}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="/admin/vendors/js/vendor.bundle.base.js"></script>
+            <!-- endinject -->
+            <!-- Plugin js for this page -->
+            <script src="/admin/vendors/chart.js/Chart.min.js"></script>
+            <script src="/admin/js/off-canvas.js"></script>
+            <script src="/admin/js/hoverable-collapse.js"></script>
+            <script src="/admin/js/template.js"></script>
+            <script src="/admin/js/settings.js"></script>
+            <script src="/admin/js/todolist.js"></script>
+            <!-- endinject -->
+            <!-- Custom js for this page-->
+            <script src="/admin/js/dashboard.js"></script>
+            <script src="/admin/js/Chart.roundedBarCharts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+{{>adminhead}}
+
+<body>
+    <div class="container-scroller">
+        {{>adminnavbar}}
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            {{>adminside}}
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="container p-5 ml-5 mr-5">
+                            <h1 style="text-align: center;">Add Banner</h1>
+                            <form action="/admin/addBanner" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input type="text" name="BannerName" class="form-control" placeholder="Banner Name"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="Title" class="form-control" placeholder="Banner Title">
+                                </div>
+                                {{!-- <div class="form-group">
+                                    <input type="text" name="redirect" class="form-control" placeholder="Route to redirect">
+                                </div> --}}
+                                <div class="form-group">
+                                    <img id="proimg" style="width: 50px; height:70px" src="" alt="Uplod Your Image" hidden>
+
+                                    <input type="file" class="form-control" name="image" id="customFile"
+                                        onchange="viewimg(event)" required />
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Banner</button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- page-body-wrapper ends -->
+                </div>
+                <!-- container-scroller -->
+            </div>
+        </div>
+</body>
+<script>
+    function viewimg(e) {
+        document.getElementById('proimg').hidden = false
+        document.getElementById('proimg').src = URL.createObjectURL(e.target.files[0])
+
+    }
+</script>
+{{>adminbottom}}

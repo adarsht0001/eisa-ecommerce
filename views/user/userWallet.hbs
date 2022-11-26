@@ -1,0 +1,91 @@
+{{>adminhead}}
+<body>
+    <div class="container-scroller">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a href="/">
+                    <h4 class="text-uppercase">{{user.name}}</h4>
+                </a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-start">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            {{>userprofile}}
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <H3 class="text-center">Balance</H3>
+                                    <h3 class="text-center">₹{{Wallet.Total}}{{empty}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4 class="text-center">History</h4>
+                            <div class="col-md-6 pt-4">
+                                {{#each History}}
+                                <div class="col-md-12 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <p class="card-title">Recieved</p>
+                                            </div>
+                                            <h6 class="font-weight-500">From :{{this.History.From}}</h6>
+                                            <p class="font-weight-500">Amount :{{this.History.credited}}</p>
+                                            <h6 class="font-weight-500">Time :{{this.History.Time}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div class="col-md-6 pt-4">
+                                {{#each referral}}
+                                <div class="col-md-12 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                {{#if this.purchase}}
+                                                <p class="card-title">Purchased</p>
+                                                {{else}}
+                                                <p class="card-title">Referral</p>
+                                                {{/if}}
+                                            </div>
+                                            {{#if this.purchase}}
+                                             {{else}}
+                                            <h6 class="font-weight-500">user: {{this.History.user}}</h6>
+                                            {{/if}}
+                                            <p class="font-weight-500">Amount :{{this.History.credited}}</p>
+                                            <h6 class="font-weight-500">Time :{{this.History.Time}}</h6>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="/admin/vendors/js/vendor.bundle.base.js"></script>
+            <!-- endinject -->
+            <!-- Plugin js for this page -->
+            <script src="/admin/vendors/chart.js/Chart.min.js"></script>
+            <script src="/admin/js/off-canvas.js"></script>
+            <script src="/admin/js/hoverable-collapse.js"></script>
+            <script src="/admin/js/template.js"></script>
+            <script src="/admin/js/settings.js"></script>
+            <script src="/admin/js/todolist.js"></script>
+            <!-- endinject -->
+            <!-- Custom js for this page-->
+            <script src="/admin/js/dashboard.js"></script>
+            <script src="/admin/js/Chart.roundedBarCharts.js"></script>
+</body>
+
+</html>

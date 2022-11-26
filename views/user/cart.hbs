@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <link rel="icon" href="/images/fevicon.png" type="image/png" />
+  <title>Eiser ecommerce</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/stylesheets/user/bootstrap.css" />
+  <link rel="stylesheet" href="/vendors/users/linericon/style.css" />
+  <link rel="stylesheet" href="/stylesheets/user/font-awesome.min.css" />
+  <link rel="stylesheet" href="/stylesheets/user/themify-icons.css" />
+  <link rel="stylesheet" href="/stylesheets/user/flaticon.css" />
+  <link rel="stylesheet" href="/vendors/users/owl-carousel/owl.carousel.min.css" />
+  <link rel="stylesheet" href="/vendors/users//lightbox/simpleLightbox.css" />
+  <link rel="stylesheet" href="/vendors/users/nice-select/css/nice-select.css" />
+  <link rel="stylesheet" href="/vendors/users/animate-css/animate.css" />
+  <link rel="stylesheet" href="/vendors/users/jquery-ui/jquery-ui.css" />
+  <!-- main css -->
+  <link rel="stylesheet" href="/stylesheets/user/style.css" />
+  <link rel="stylesheet" href="/stylesheets/user/responsive.css" />
+
+</head>
+
+{{>userheader}}
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+  <div class="container" id="CartItems">
+    <div class="cart_inner row">
+      <div class="table-responsive col-md-8">
+        <div class="row">
+          <table class="table">
+            {{#if products.empty}}
+            {{else}}
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th colspan="2">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+                <th scope="col">Quantity</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            {{/if}}
+            <tbody>
+              {{#if products.empty}}
+              <tr>
+                <td></td>
+                <td></td>
+                <td colspan="2">
+                  <H2>Cart Is Now Empty</H2>
+                  <a class="main_btn m-2" href="/shop">Shop Now</a>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              {{else}}
+              {{#each products}}
+
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="/product/{{this.products.imagefileName.[0]}}" alt=""
+                        style="height:100px; width: 100px; border-radius: 15px;" />
+                    </div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <div class="media-body">
+                    <p class='productname'>{{this.products.product}}</p>
+                  </div>
+                </td>
+                <td>₹{{this.products.offerprice}}</td>
+                <td>
+                  <h5 class="stotal">{{this.total}}</h5>
+                </td>
+                <td>
+                  <div class="product_count">
+                    <input type="text" name="qty" id="{{this.products._id}}" value="{{this.count}}" title="Quantity:"
+                      class="input-text qty" />
+                    <button onclick="quantity('{{this._id}}','{{this.products._id}}',1)" class="increase items-count"
+                      type="button">
+                      <i class="lnr lnr-chevron-up"></i>
+                    </button>
+                    <button onclick="quantity('{{this._id}}','{{this.products._id}}',-1)" class="reduced items-count"
+                      id="reduce" type="button">
+                      <i class="lnr lnr-chevron-down"></i>
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <button class="main_btn" onclick="removebtn('{{this.products._id}}')">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                  {{!-- <a href="/delete/{{this.products._id}}" onclick="delete('{{this._id}}')"> --}}
+                  </a>
+                </td>
+              </tr>
+              {{/each}}
+              {{/if}}
+              <tr class="bottom_button">
+                {{#if products.empty}}
+                <td>
+                  <a class="gray_btn" href="/shop">Update Cart</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                {{else}}
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="ml-2">
+                  <div class="cupon_text">
+                    <input type="text" style="color: #28a745;" id="couponCode" placeholder="Coupon Code" />
+                    <button class="main_btn" id="apply" onclick="coupon()">Apply</button>
+                    <button class="gray_btn" onclick="clearcoup()">Close Coupon</button>
+                    <br>
+                  </div>
+                </td>
+
+                {{/if}}
+              </tr>
+              {{#if products.empty}}
+              {{else}}
+              <tr class="out_button_area">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="checkout_btn_inner">
+                    <a class="gray_btn" href="/shop">Continue Shopping</a>
+                    <a class="main_btn" href="/checkout">Proceed to checkout</a>
+                  </div>
+                </td>
+              </tr>
+              {{/if}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4 card">
+        <div class="m-5 text-center">
+          <h3 class="title">Your Order</h3>
+        </div>
+        <div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each products}}
+              <tr>
+                <td>{{this.products.product}} x{{this.count}}</td>
+                <td class="sideTotal">{{this.total}}</td>
+              </tr>
+              {{/each}}
+              <tr></tr>
+              <tr id="couponDiscount" hidden>
+                <td>Coupon</td>
+                <td id="CouponDicountprice"></td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Total</h4>
+                </td>
+                <td>
+                  <h4 id="total">
+                    {{total.total}}
+                  </h4>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {{#if products.empty}}
+        <div class="checkout_btn_inner text-center m-2">
+          <a class="gray_btn" href="/shop">Continue Shopping</a>
+        </div>
+        {{else}}
+        <div class="checkout_btn_inner text-center m-2">
+          <a class="main_btn" href="/checkout">Proceed to checkout</a>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Cart Area =================-->
+
+<!--================ start footer Area  =================-->
+<footer class="footer-area section_gap">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-md-6 single-footer-widget">
+        <h4>Top Products</h4>
+        <ul>
+          <li><a href="#">Managed Website</a></li>
+          <li><a href="#">Manage Reputation</a></li>
+          <li><a href="#">Power Tools</a></li>
+          <li><a href="#">Marketing Service</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-6 single-footer-widget">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Brand Assets</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-6 single-footer-widget">
+        <h4>Features</h4>
+        <ul>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Brand Assets</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-6 single-footer-widget">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Guides</a></li>
+          <li><a href="#">Research</a></li>
+          <li><a href="#">Experts</a></li>
+          <li><a href="#">Agencies</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6 single-footer-widget">
+        <h4>Newsletter</h4>
+        <p>You can trust us. we only send promo offers,</p>
+        <div class="form-wrap" id="mc_embed_signup">
+          <form target="_blank"
+            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+            method="get" class="form-inline">
+            <input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'Your Email Address '" required="" type="email">
+            <button class="click-btn btn btn-default">Subscribe</button>
+            <div style="position: absolute; left: -5000px;">
+              <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+            </div>
+
+            <div class="info"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom row align-items-center">
+      <div class="col-lg-4 col-md-12 footer-social">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-behance"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--================ End footer Area  =================-->
+
+<script src="/javascripts/user/jquery-3.2.1.min.js"></script>
+<script src="/javascripts/user/popper.js"></script>
+<script src="/javascripts/user/bootstrap.min.js"></script>
+<script src="/javascripts/user/stellar.js"></script>
+<script src="/vendors/users/lightbox/simpleLightbox.min.js"></script>
+<script src="/vendors/users/nice-select/js/jquery.nice-select.min.js"></script>
+<script src="/vendors/users/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="/vendors/users/isotope/isotope-min.js"></script>
+<script src="/vendors/users/owl-carousel/owl.carousel.min.js"></script>
+<script src="/javascripts/user/jquery.ajaxchimp.min.js"></script>
+<script src="/javascripts/user/mail-script.js"></script>
+<script src="/vendors/users/jquery-ui/jquery-ui.js"></script>
+<script src="/vendors/users/counter-up/jquery.waypoints.min.js"></script>
+<script src="/vendors/users/counter-up/jquery.counterup.js"></script>
+<script src="/javascripts/user/theme.js"></script>
+<script src="/javascripts/user/sweetalert.min.js"></script>
+<script src="/user/cart.js"></script>
+</body>
+
+</html>

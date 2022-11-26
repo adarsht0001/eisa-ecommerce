@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="icon" href="/images/fevicon.png" type="image/png" />
+  <title>Eiser ecommerce</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/stylesheets/user/bootstrap.css" />
+  <link rel="stylesheet" href="/vendors/users/linericon/style.css" />
+  <link rel="stylesheet" href="/stylesheets/user/font-awesome.min.css" />
+  <link rel="stylesheet" href="/stylesheets/user/themify-icons.css" />
+  <link rel="stylesheet" href="/stylesheets/user/flaticon.css" />
+  <link rel="stylesheet" href="/vendors/users/owl-carousel/owl.carousel.min.css" />
+  <link rel="stylesheet" href="/vendors/users/lightbox/simpleLightbox.css" />
+  <link rel="stylesheet" href="/vendors/users/nice-select/css/nice-select.css" />
+  <link rel="stylesheet" href="/vendors/users/animate-css/animate.css" />
+  <link rel="stylesheet" href="/vendors/users/jquery-ui/jquery-ui.css" />
+  <!-- main css -->
+  <link rel="stylesheet" href="/stylesheets/user/style.css" />
+  <link rel="stylesheet" href="/stylesheets/user/responsive.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+
+</head>
+{{>userheader}}
+<section class="cart_area">
+  <div class="container">
+    <div class="cart_inner row">
+      <div class="table-responsive col-md-12">
+        <div class="row">
+          <table class="table" id="CartItems">
+            {{#if Wishlist.empty}}
+            {{else}}
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th colspan="2">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Cart</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            {{/if}}
+            <tbody>
+              {{#if Wishlist.empty}}
+              <tr>
+                <td></td>
+                <td></td>
+                <td colspan="2">
+                  <H2>Whislist Is Now Empty</H2>
+                  <a class="main_btn m-2" href="/shop">Shop Now</a>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              {{else}}
+              {{#each Wishlist}}
+
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="/product/{{this.products.imagefileName.[0]}}" alt=""
+                        style="height:100px; width: 100px; border-radius: 15px;" />
+                    </div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <div class="media-body">
+                    <p class='productname'>{{this.products.product}}</p>
+                  </div>
+                </td>
+                <td>₹{{this.products.offerprice}}</td>
+                <td>
+                  <a class="main_btn" href="/productview/{{this.products._id}}">
+                    <i class="bi bi-eye">View Product</i>
+                  </a>
+                </td>
+                <td>
+                  <button class="main_btn" onclick="del('{{this.products._id}}')">
+                    <i class="fa fa-trash" aria-hidden="true"> Delete</i>
+                  </button>
+                  {{!-- <a href="/delete/{{this.products._id}}" onclick="delete('{{this._id}}')"> --}}
+                  </a>
+                </td>
+              </tr>
+              {{/each}}
+              {{/if}}
+              {{#if Wishlist.empty}}
+              {{else}}
+              <tr class="out_button_area">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="checkout_btn_inner">
+                    <a class="gray_btn" href="/shop">Continue Shopping</a>
+                  </div>
+                </td>
+              </tr>
+              {{/if}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/javascripts/user/jquery-3.2.1.min.js"></script>
+<script src="/javascripts/user/popper.js"></script>
+<script src="/javascripts/user/bootstrap.min.js"></script>
+<script src="/javascripts/user/stellar.js"></script>
+<script src="/vendors/users/lightbox/simpleLightbox.min.js"></script>
+<script src="/vendors/users/nice-select/js/jquery.nice-select.min.js"></script>
+<script src="/vendors/users/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="/vendors/users/isotope/isotope-min.js"></script>
+<script src="/vendors/users/owl-carousel/owl.carousel.min.js"></script>
+<script src="/javascripts/user/jquery.ajaxchimp.min.js"></script>
+<script src="/javascripts/user/mail-script.js"></script>
+<script src="/vendors/users/jquery-ui/jquery-ui.js"></script>
+<script src="/vendors/users/counter-up/jquery.waypoints.min.js"></script>
+<script src="/vendors/users/counter-up/jquery.counterup.js"></script>
+<script src="/javascripts/user/theme.js"></script>
+<script src="/javascripts/user/sweetalert.min.js"></script>
+<script>
+  
+  function del(id){
+    $.ajax({
+      url: '/deleteItemWishlist/'+id,
+      method: 'get',
+      success: (response) => {
+        $("#CartItems").load(window.location.href + " #CartItems");
+      }
+    })
+  }
+</script>
+</body>
+
+</html>

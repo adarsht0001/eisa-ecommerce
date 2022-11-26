@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/stylesheets/user/loginform.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+   <link rel="icon" href="/images/fevicon.png" type="image/png" />
+  <title>Eiser ecommerce</title>
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <form onsubmit="return valideform()" action="/signup" method="post" class="form">
+            {{#if errorMessage}}
+            <p style="color:red;">{{errorMessage}}</p>
+            {{/if}}
+            <h2>Signup</h2>
+            <div class="input-group">
+                <input type="text" name="name" id="name" oninput="validateName()" required />
+                <label>Name</label>
+                <div>
+                    <span style="color:red;" id="name-error"></span>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" id="email" oninput="validateEmail()" required />
+                <label>Email</label>
+                <div>
+                    <span style="color:red;" id="email-error"></span>
+                </div>
+            </div>
+            <div class="input-group">
+                <input name="phone" id="phone" oninput="validateMobile()" required />
+                <label>Mobile No</label>
+                <div>
+                    <span style="color:red;" id="mobile-error"></span>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" id="pass" required oninput="passwordvalidate()" />
+                <label>Password</label>
+                <div>
+                    <span style="color:red;" id="pass-error"></span>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="password" id="repass" oninput="validateRepass()" required />
+                <label>Re-enter Password</label>
+                <div>
+                    <span style="color:red;" id="pass2-error"></span>
+                </div>
+            </div>
+            <div>
+                <p>
+                    <a data-bs-toggle="collapse" href="#refferel"  aria-expanded="false"
+                        aria-controls="refferel">
+                       <label>
+                        Use Refferel
+                       </label>
+                    </a>
+                </p>
+                <div class="collapse input-group" id="refferel">
+                    <input type="text" name="referralCode" placeholder="Enter Your Refferel Code">
+                </div>
+            </div>
+            <input type="submit" value="Submit" class="submit-btn" />
+        </form>
+    </div>
+</body>
+<script src="/javascripts/user/test.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+    integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+    crossorigin="anonymous"></script>
+
+</html>

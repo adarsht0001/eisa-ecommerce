@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/user/loginform.css">
+      <link rel="icon" href="/images/fevicon.png" type="image/png" />
+  <title>Eiser ecommerce</title>
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <form action="/login-otp" method="post" onsubmit="return valideform()" class="form">
+            {{#if errorMessage}}
+            <p style="color:red;">{{errorMessage}}</p>
+            {{/if}}
+            <h2>OTP number</h2>
+            <div class="input-group">
+                <input type="text" name="phone" id="phone" oninput="validateMobile()" required>
+                <label>Mobile No</label>
+                <span id="mobile-error"></span>
+            </div>
+            <input type="submit" value="Submit" class="submit-btn">
+        </form>
+    </div>
+</body>
+<script src="/javascripts/user/test.js"></script>
+</html>
