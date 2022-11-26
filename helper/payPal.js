@@ -85,8 +85,8 @@ module.exports = {
           payment_method: "paypal",
         },
         redirect_urls: {
-          return_url: "http://localhost:3000/verifyPaypal",
-          cancel_url: "http://localhost:3000/cancel",
+          return_url: "https://eiser.tk/verifyPaypal",
+          cancel_url: "https://eiser.tk/cancel",
         },
         transactions: [
           {

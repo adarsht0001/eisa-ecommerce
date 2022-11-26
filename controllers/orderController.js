@@ -12,6 +12,7 @@ module.exports = {
     let products = await carthelper.viewcart(req.session.user._id);
     let wallettotal = await couponhelper.findWalletTotal(req.session.user._id);
     let total = await orderhelper.total(req.session.user._id);
+    let recent=false;
     let Discount=false
     if (req.session.coupon) {
       Discount=req.session.coupon.Total-total.total

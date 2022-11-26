@@ -44,7 +44,7 @@ module.exports = {
                   .generate({
                     prefix: userData.name,
                   })[0]
-                  .replaceAll(" ", "");
+                  .replace(/\s+/, "");
                 db.get()
                   .collection(collection.USER_COLLECTION)
                   .insertOne(userData)
@@ -90,7 +90,7 @@ module.exports = {
                 .generate({
                   prefix: userData.name,
                 })[0]
-                .replaceAll(" ", "");
+                .replace(/\s+/, "");
               db.get()
                 .collection(collection.USER_COLLECTION)
                 .insertOne(userData)
