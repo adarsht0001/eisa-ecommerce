@@ -234,7 +234,7 @@ module.exports = {
             Element.purchase = true;
           }
         });
-        res.render("user/userwallet", {
+        res.render("user/userWallet", {
           Wallet,
           History,
           user: req.session.user,
