@@ -96,7 +96,9 @@ module.exports = {
               });
             });
         } else {
-          res.json({ walletPaymentFail: true });
+          orderhelper.deleteOrder(orderId).then(()=>{
+          res.json({ walletPaymentFail: true })
+          })
         }
       } else {
         let items=await payPalhelper.OrderItems(orderId)
