@@ -181,7 +181,7 @@ module.exports = {
   },
   postVerifyOtp: (req, res) => {
     var arr = Object.values(req.body);
-    var otp = arr.toString().replace(/\,/, "");
+    var otp = arr.toString().replace(/,/g, "");
     client.verify
       .services(process.env.twilio_serviceID)
       .verificationChecks.create({
@@ -316,7 +316,7 @@ module.exports = {
 
   changeotpverify:(req,res)=>{
     var arr = Object.values(req.body);
-    var otp = arr.toString().replace(/\,/, "");
+    var otp = arr.toString().replace(/,/g, "");
     client.verify
       .services(process.env.twilio_serviceID)
       .verificationChecks.create({

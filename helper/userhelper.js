@@ -202,7 +202,6 @@ module.exports = {
           },
         ])
         .toArray();
-      // console.log(recent);
       resolve(recent);
     });
   },

@@ -6,7 +6,7 @@ const producthelper = require("../helper/producthelper");
 
 module.exports={
     getCart:async (req, res) => {
-      req.session.coupon=null
+      delete req.session.coupon
         let products = await carthelper.viewcart(req.session.user._id);
         let total = await orderhelper.total(req.session.user._id);
         if (products.length == 0) {
