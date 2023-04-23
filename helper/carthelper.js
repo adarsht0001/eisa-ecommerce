@@ -1,7 +1,5 @@
 var db = require("../config/connection");
 var collection = require("../config/collection");
-const { CART_COLLECtION } = require("../config/collection");
-const { response } = require("../app");
 var objectID = require("mongodb").ObjectId;
 
 module.exports = {
