@@ -6,6 +6,7 @@ var logger = require("morgan");
 var hbs = require("hbs");
 var session = require("express-session");
 const nocache = require("nocache");
+const axios = require("axios");
 colors = require("colors");
 
 var db = require("./config/connection");
@@ -58,7 +59,7 @@ db.connect((err) => {
   if (err) {
     console.log("connection error" + err);
   } else {
-    console.log("db connected".rainbow);
+    console.log("db connected".america);
   }
 });
 
