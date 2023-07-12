@@ -9,6 +9,7 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "bootstrap-icons": "^1.9.1",
+    "colors": "^1.4.0",
     "cookie-parser": "~1.4.4",
     "datatables": "^1.10.18",
     "debug": "~2.6.9",

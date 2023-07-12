@@ -6,15 +6,15 @@ var logger = require("morgan");
 var hbs = require("hbs");
 var session = require("express-session");
 const nocache = require("nocache");
-
+colors = require("colors");
 
 var db = require("./config/connection");
 // declaring partials path
 var pathpartial = path.join(__dirname, "views/partials");
 // requiring routers
-var adminRouter = require("./routes/admin")
-var usersRouter = require("./routes/users")
-var categoryRouter = require("./routes/category")
+var adminRouter = require("./routes/admin");
+var usersRouter = require("./routes/users");
+var categoryRouter = require("./routes/category");
 
 var app = express();
 
@@ -22,14 +22,12 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
-
 // hbs partial setup
 hbs.registerPartials(pathpartial);
 // inc helper for +1 index in tables
 hbs.registerHelper("inc", function (value, options) {
   return parseInt(value) + 1;
 });
-
 
 // cache control middleware
 app.use(nocache());
@@ -60,7 +58,7 @@ db.connect((err) => {
   if (err) {
     console.log("connection error" + err);
   } else {
-    console.log("db connected");
+    console.log("db connected".rainbow);
   }
 });
 
