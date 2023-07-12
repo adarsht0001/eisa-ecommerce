@@ -25,5 +25,5 @@ jobs:
           ARGS: "-rlgoDzvc -i --delete"
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: "/home/ubuntu/server"
+          TARGET: "/home/ubuntu/eiser"
           EXCLUDE: "/dist/, .env"
