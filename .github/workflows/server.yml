@@ -4,10 +4,6 @@ on:
   push:
     branches: ["master"]
 
-defaults:
-  run:
-    working-directory: ./server
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,7 +23,6 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "server/"
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: "/home/ubuntu/server"
