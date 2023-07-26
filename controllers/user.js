@@ -22,7 +22,7 @@ module.exports = {
         let wishItem = await wishlistHelper.getwishlist(req.session.user._id);
         Topproducts.forEach((element) => {
           wishItem.forEach((item) => {
-            if (element.products._id.equals(item.products._id)) {
+            if (element?.products?._id.equals(item.products._id)) {
               element.wishlist = true;
             }
           });
